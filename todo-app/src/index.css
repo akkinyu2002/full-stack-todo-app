@@ -39,8 +39,6 @@ button {
   max-width: 650px;
 }
 
-/* Header */
-
 .header {
   margin-bottom: 32px;
 }
@@ -69,13 +67,11 @@ h1 {
   color: #777;
 }
 
-/* Input */
-
 .todo-form {
   display: flex;
   gap: 10px;
 
-  margin-bottom: 36px;
+  margin-bottom: 20px;
 }
 
 .todo-form input {
@@ -111,7 +107,13 @@ h1 {
   opacity: 0.9;
 }
 
-/* Todo header */
+.error {
+  margin: 0 0 20px;
+
+  color: #dc2626;
+
+  font-size: 14px;
+}
 
 .todo-header {
   display: flex;
@@ -124,8 +126,6 @@ h1 {
   font-size: 13px;
   font-weight: 600;
 }
-
-/* Todo list */
 
 .todo-item {
   display: flex;
@@ -181,8 +181,6 @@ h1 {
   color: #999;
   text-align: center;
 }
-
-/* Footer */
 
 footer {
   margin-top: 24px;

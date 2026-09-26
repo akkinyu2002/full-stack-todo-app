@@ -1,36 +1,45 @@
 import { useEffect, useState } from "react";
 
-const API_URL = "http://localhost:5000/api/todos";
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000/api/todos";
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  // Get todos from backend
   useEffect(() => {
-    fetch(API_URL)
-      .then((response) => {
+    async function loadTodos() {
+      try {
+        const response = await fetch(API_URL);
+
         if (!response.ok) {
           throw new Error("Failed to fetch todos");
         }
 
-        return response.json();
-      })
-      .then((data) => {
+        const data = await response.json();
+
         setTodos(data);
-      })
-      .catch((error) => {
-        console.error("Failed to fetch todos:", error);
-      });
+      } catch (error) {
+        console.error(error);
+        setError("Unable to connect to the Todo API.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadTodos();
   }, []);
 
-  // Add todo to backend
   async function addTodo(e) {
     e.preventDefault();
 
     if (!title.trim()) return;
 
     try {
+      setError("");
+
       const response = await fetch(API_URL, {
         method: "POST",
         headers: {
@@ -54,13 +63,15 @@ function App() {
 
       setTitle("");
     } catch (error) {
-      console.error("Failed to add todo:", error);
+      console.error(error);
+      setError("Unable to add the task.");
     }
   }
 
-  // Update todo completion in backend
   async function toggleTodo(id, completed) {
     try {
+      setError("");
+
       const response = await fetch(`${API_URL}/${id}`, {
         method: "PATCH",
         headers: {
@@ -83,13 +94,15 @@ function App() {
         )
       );
     } catch (error) {
-      console.error("Failed to update todo:", error);
+      console.error(error);
+      setError("Unable to update the task.");
     }
   }
 
-  // Delete todo permanently from backend
   async function deleteTodo(id) {
     try {
+      setError("");
+
       const response = await fetch(`${API_URL}/${id}`, {
         method: "DELETE",
       });
@@ -102,7 +115,8 @@ function App() {
         currentTodos.filter((todo) => todo.id !== id)
       );
     } catch (error) {
-      console.error("Failed to delete todo:", error);
+      console.error(error);
+      setError("Unable to delete the task.");
     }
   }
 
@@ -140,6 +154,12 @@ function App() {
           </button>
         </form>
 
+        {error && (
+          <p className="error">
+            {error}
+          </p>
+        )}
+
         <div className="todo-header">
           <span>Tasks</span>
 
@@ -150,7 +170,11 @@ function App() {
 
         <div className="todo-list">
 
-          {todos.length === 0 ? (
+          {loading ? (
+            <p className="empty">
+              Loading tasks...
+            </p>
+          ) : todos.length === 0 ? (
             <p className="empty">
               No tasks yet.
             </p>
@@ -186,6 +210,7 @@ function App() {
                 </label>
 
                 <button
+                  type="button"
                   className="delete-button"
                   onClick={() =>
                     deleteTodo(todo.id)
