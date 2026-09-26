@@ -1,0 +1,192 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background: #f7f7f5;
+  color: #202020;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+
+  padding: 80px 20px;
+}
+
+.todo-container {
+  width: 100%;
+  max-width: 650px;
+}
+
+/* Header */
+
+.header {
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+
+  color: #2563eb;
+}
+
+h1 {
+  margin: 0;
+
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.subtitle {
+  margin: 12px 0 0;
+
+  color: #777;
+}
+
+/* Input */
+
+.todo-form {
+  display: flex;
+  gap: 10px;
+
+  margin-bottom: 36px;
+}
+
+.todo-form input {
+  flex: 1;
+
+  min-width: 0;
+
+  padding: 14px 16px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  background: white;
+
+  outline: none;
+}
+
+.todo-form input:focus {
+  border-color: #2563eb;
+}
+
+.todo-form button {
+  padding: 0 22px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #2563eb;
+  color: white;
+}
+
+.todo-form button:hover {
+  opacity: 0.9;
+}
+
+/* Todo header */
+
+.todo-header {
+  display: flex;
+  justify-content: space-between;
+
+  padding-bottom: 12px;
+
+  border-bottom: 1px solid #ddd;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Todo list */
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 4px;
+
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.todo-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  min-width: 0;
+}
+
+.todo-left input {
+  width: 17px;
+  height: 17px;
+
+  accent-color: #2563eb;
+}
+
+.todo-left span {
+  word-break: break-word;
+}
+
+.completed {
+  color: #999;
+  text-decoration: line-through;
+}
+
+.delete-button {
+  border: none;
+  background: transparent;
+
+  color: #dc2626;
+
+  font-size: 22px;
+  line-height: 1;
+}
+
+.delete-button:hover {
+  opacity: 0.7;
+}
+
+.empty {
+  padding: 30px 0;
+
+  color: #999;
+  text-align: center;
+}
+
+/* Footer */
+
+footer {
+  margin-top: 24px;
+
+  font-size: 13px;
+  color: #888;
+}
